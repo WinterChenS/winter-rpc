@@ -1,0 +1,33 @@
+{
+  "properties": [
+    {
+      "name": "rpc.client.balance",
+      "type": "java.lang.String",
+      "description": "Description for rpc.client.balance."
+    },
+    {
+      "name": "rpc.client.discovery-addr",
+      "type": "java.lang.String",
+      "description": "Description for rpc.client.discovery-addr."
+    },
+    {
+      "name": "rpc.client.timeout",
+      "type": "java.lang.String",
+      "description": "Description for rpc.client.timeout."
+    },
+    {
+      "name": "rpc.server.port",
+      "type": "java.lang.String",
+      "description": "Description for rpc.server.port."
+    },
+    {
+      "name": "rpc.server.app-name",
+      "type": "java.lang.String",
+      "description": "Description for rpc.server.app-name."
+    },
+    {
+      "name": "rpc.server.registry-addr",
+      "type": "java.lang.String",
+      "description": "Description for rpc.server.registry-addr."
+    }
+  ] }

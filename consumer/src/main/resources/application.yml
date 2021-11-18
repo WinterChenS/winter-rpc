@@ -12,3 +12,9 @@ rpc:
 
 server:
   port: 8000
+
+logging:
+  level:
+    root: debug
+    org.springframework.web: debug
+    com.winterchen: debug

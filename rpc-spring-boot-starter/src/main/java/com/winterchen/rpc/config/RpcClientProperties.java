@@ -1,6 +1,7 @@
 package com.winterchen.rpc.config;
 
 import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author CENTURY

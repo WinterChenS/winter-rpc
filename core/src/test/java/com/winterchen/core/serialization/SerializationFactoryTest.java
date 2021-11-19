@@ -15,7 +15,7 @@ class SerializationFactoryTest {
     public void testSerialze() {
 
         RpcSerialization rpcSerialization = SerializationFactory.getRpcSerialization(SerializationTypeEnum.JSON);
-        RpcResponse<String> ok = RpcResponse.ok("this is a string");
+        RpcResponse ok = RpcResponse.ok("this is a string");
         byte[] bytes = rpcSerialization.serialize(ok);
         RpcResponse deserialize = rpcSerialization.deserialize(bytes, RpcResponse.class);
         assertEquals(ok, deserialize);

@@ -1,9 +1,10 @@
 package com.winterchen.consumer.rest;
 
-import com.winterchen.consumer.service.UserService;
+import com.winterchen.providerapi.api.UserApi;
 import com.winterchen.providerapi.request.UserRequest;
 import com.winterchen.providerapi.response.UserResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.winterchen.rpc.annotation.RpcAutowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,44 +18,44 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    @RpcAutowired(version = "1.0")
+    private UserApi userApi;
 
 
     @GetMapping("/{id}")
-    public UserResponse getById(
+    public ResponseEntity<UserResponse> getById(
             @PathVariable("id")
             String id
     ) {
-        return userService.getById(id);
+        return ResponseEntity.ok(userApi.getById(id));
     }
 
     @PostMapping("")
-    public UserResponse addUser(
+    public ResponseEntity<UserResponse> addUser(
             @RequestBody
             UserRequest userRequest
     ) {
-        return userService.addUser(userRequest);
+        return ResponseEntity.ok(userApi.addUser(userRequest));
     }
 
     @PutMapping("")
-    public String update(
+    public ResponseEntity<String> update(
             @RequestBody
             UserRequest userRequest
     ) {
-        userService.update(userRequest);
-        return "success";
+        userApi.update(userRequest);
+        return ResponseEntity.ok("success");
     }
 
     @DeleteMapping("/{id}")
-    public String delete(String id) {
-        userService.delete(id);
-        return "success";
+    public ResponseEntity<String> delete(String id) {
+        userApi.delete(id);
+        return ResponseEntity.ok("success");
     }
 
     @GetMapping("/list")
-    public List<UserResponse> list() {
-        return userService.list();
+    public ResponseEntity<List<UserResponse>> list() {
+        return ResponseEntity.ok(userApi.list());
     }
 
 }

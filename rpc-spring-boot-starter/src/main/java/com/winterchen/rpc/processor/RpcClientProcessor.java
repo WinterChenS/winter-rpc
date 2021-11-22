@@ -19,7 +19,7 @@ import org.springframework.util.ReflectionUtils;
  * @Description bean 后置处理器 获取所有bean
  * 判断bean字段是否被 {@link RpcAutowired } 注解修饰
  * 动态修改被修饰字段的值为代理对象 {@link ClientStubProxyFactory}
- * @author CENTURY
+ * @author winterchen
  * @version 1.0
  * @date 2021/11/17 11:18
  **/

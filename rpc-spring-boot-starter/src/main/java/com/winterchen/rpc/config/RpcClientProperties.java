@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author CENTURY
+ * @author winterchen
  * @version 1.0
  * @date 2021/11/17 10:15
  * @description rpc客户端配置信息

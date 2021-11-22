@@ -20,7 +20,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 
 /**
- * @author CENTURY
+ * @author winterchen
  * @version 1.0
  * @date 2021/11/17 10:13
  * @description 自动配置

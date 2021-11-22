@@ -4,7 +4,7 @@ package com.winterchen.rpc.transport.client;
 import java.util.concurrent.*;
 
 /**
- * @author CENTURY
+ * @author winterchen
  * @version 1.0
  * @date 2021/11/17 11:12
  * @description TODO

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * @author CENTURY
+ * @author winterchen
  * @version 1.0
  * @date 2021/11/16 16:17
  * @description 随机算法

@@ -1,7 +1,7 @@
 package com.winterchen.core.common;
 
 /**
- * @author CENTURY
+ * @author winterchen
  * @version 1.0
  * @date 2021/11/16 13:38
  * @description 服务工具类

@@ -1,7 +1,7 @@
 package com.winterchen.core.balancer;
 
 /**
- * @author CENTURY
+ * @author winterchen
  * @version 1.0
  * @date 2021/11/16 16:14
  **/

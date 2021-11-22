@@ -1,7 +1,7 @@
 package com.winterchen.core.serialization;
 
 /**
- * @author CENTURY
+ * @author winterchen
  * @version 1.0
  * @date 2021/11/16 14:59
  * @description 序列化工厂

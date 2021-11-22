@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +30,7 @@ public class RpcClientAutoConfiguration {
 
     @Bean
     public RpcClientProperties ppcClientProperties(Environment environment) {
+        //这种初始化方式是因为收到下面processor的依赖导致该配置在比较早的时期进行初始化，如果使用普通的方式会无法解析到配置文件
         BindResult<RpcClientProperties> result = Binder.get(environment)
                 .bind("rpc.client", RpcClientProperties.class);
         return result.get();

@@ -1,12 +1,12 @@
-package com.winterchen.rpc.provider;
+package com.winterchen.rpc.server.provider;
 
 import com.winterchen.core.common.ServiceInfo;
 import com.winterchen.core.common.ServiceUtil;
 import com.winterchen.core.register.RegistryService;
-import com.winterchen.rpc.annotation.RpcService;
-import com.winterchen.rpc.config.RpcServerProperties;
-import com.winterchen.rpc.store.LocalServerCache;
-import com.winterchen.rpc.transport.server.RpcServer;
+import com.winterchen.rpc.server.annotation.RpcService;
+import com.winterchen.rpc.server.config.RpcServerProperties;
+import com.winterchen.rpc.server.store.LocalServerCache;
+import com.winterchen.rpc.server.transport.RpcServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -54,11 +54,10 @@ public class RpcServerProvider implements BeanPostProcessor, CommandLineRunner {
             try {
                 String serviceName = rpcService.interfaceType().getName();
                 String version = rpcService.version();
-                String serviceKey = ServiceUtil.serviceKey(serviceName, version);
-                LocalServerCache.store(serviceKey, bean);
+                LocalServerCache.store(ServiceUtil.serviceKey(serviceName, version), bean);
 
                 ServiceInfo serviceInfo = new ServiceInfo();
-                serviceInfo.setServiceName(serviceKey);
+                serviceInfo.setServiceName(ServiceUtil.serviceKey(serviceName, version));
                 serviceInfo.setPort(properties.getPort());
                 serviceInfo.setAddress(InetAddress.getLocalHost().getHostAddress());
                 serviceInfo.setAppName(properties.getAppName());

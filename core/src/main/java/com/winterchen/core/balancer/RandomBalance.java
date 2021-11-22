@@ -13,7 +13,7 @@ import java.util.Random;
  **/
 public class RandomBalance implements LoadBalance {
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     @Override
     public ServiceInfo chooseOne(List<ServiceInfo> serviceInfos) {

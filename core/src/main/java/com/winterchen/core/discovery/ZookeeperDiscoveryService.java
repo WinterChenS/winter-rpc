@@ -45,7 +45,7 @@ public class ZookeeperDiscoveryService implements DiscoveryService{
                     .build();
             this.serviceDiscovery.start();
         } catch (Exception e) {
-            log.error("serviceDiscovery start error :{}", e);
+            log.error("serviceDiscovery start error ", e);
         }
     }
 

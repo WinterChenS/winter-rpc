@@ -6,8 +6,8 @@ spring:
 
 rpc:
   server:
-    port: 8002
+    port: 9093
     app-name: provider
     registry-addr: 127.0.0.1:2181
 server:
-  port: 8001
+  port: 8091

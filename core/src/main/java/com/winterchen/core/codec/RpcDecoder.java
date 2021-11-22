@@ -1,7 +1,14 @@
 package com.winterchen.core.codec;
 
+import com.winterchen.core.common.RpcRequest;
+import com.winterchen.core.common.RpcResponse;
+import com.winterchen.core.protocol.MessageHeader;
+import com.winterchen.core.protocol.MessageProtocol;
 import com.winterchen.core.protocol.MsgType;
 import com.winterchen.core.protocol.ProtocolConstants;
+import com.winterchen.core.serialization.RpcSerialization;
+import com.winterchen.core.serialization.SerializationFactory;
+import com.winterchen.core.serialization.SerializationTypeEnum;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.ByteToMessageDecoder;
@@ -71,7 +78,36 @@ public class RpcDecoder extends ByteToMessageDecoder {
             return;
         }
 
+        MessageHeader header = new MessageHeader();
+        header.setMagic(magic);
+        header.setVersion(version);
+        header.setSerialization(serializeType);
+        header.setStatus(status);
+        header.setRequestId(String.valueOf(requestId));
+        header.setMsgType(msgType);
+        header.setMsgLen(dataLength);
 
+        RpcSerialization rpcSerialization = SerializationFactory.getRpcSerialization(SerializationTypeEnum.parseByType(serializeType));
+        switch (msgTypeEnum) {
+            case REQUEST:
+                RpcRequest request = rpcSerialization.deserialize(data, RpcRequest.class);
+                if (request != null) {
+                    MessageProtocol<RpcRequest> protocol = new MessageProtocol<>();
+                    protocol.setHeader(header);
+                    protocol.setBody(request);
+                    out.add(protocol);
+                }
+                break;
+            case RESPONSE:
+                RpcResponse response = rpcSerialization.deserialize(data, RpcResponse.class);
+                if (response != null) {
+                    MessageProtocol<RpcResponse> protocol = new MessageProtocol<>();
+                    protocol.setHeader(header);
+                    protocol.setBody(response);
+                    out.add(protocol);
+                }
+                break;
+        }
     }
 
 }

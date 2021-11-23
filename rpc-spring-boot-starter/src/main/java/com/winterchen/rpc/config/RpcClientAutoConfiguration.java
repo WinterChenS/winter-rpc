@@ -4,6 +4,7 @@ import com.winterchen.core.balancer.FullRoundBalance;
 import com.winterchen.core.balancer.LoadBalance;
 import com.winterchen.core.balancer.RandomBalance;
 import com.winterchen.core.discovery.DiscoveryService;
+import com.winterchen.core.discovery.NacosDiscoveryService;
 import com.winterchen.core.discovery.ZookeeperDiscoveryService;
 import com.winterchen.rpc.processor.RpcClientProcessor;
 import com.winterchen.rpc.proxy.ClientStubProxyFactory;
@@ -58,7 +59,9 @@ public class RpcClientAutoConfiguration {
         return new FullRoundBalance();
     }
 
+    @Primary
     @Bean
+    @ConditionalOnProperty(prefix = "rpc.client", name = "type", havingValue = "zookeeper", matchIfMissing = true)
     @ConditionalOnMissingBean
     @ConditionalOnBean({RpcClientProperties.class, LoadBalance.class})
     public DiscoveryService discoveryService(@Autowired RpcClientProperties properties,
@@ -66,6 +69,13 @@ public class RpcClientAutoConfiguration {
         return new ZookeeperDiscoveryService(properties.getDiscoveryAddr(), loadBalance);
     }
 
+    @Bean
+    @ConditionalOnProperty(prefix = "rpc.client", name = "type", havingValue = "nacos")
+    @ConditionalOnMissingBean
+    @ConditionalOnBean({RpcClientProperties.class})
+    public DiscoveryService nacosDiscoveryService(@Autowired RpcClientProperties rpcClientProperties) {
+        return new NacosDiscoveryService(rpcClientProperties.getDiscoveryAddr());
+    }
 
     @Bean
     @ConditionalOnMissingBean

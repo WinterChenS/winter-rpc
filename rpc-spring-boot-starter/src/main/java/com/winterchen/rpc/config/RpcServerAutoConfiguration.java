@@ -1,5 +1,6 @@
 package com.winterchen.rpc.config;
 
+import com.winterchen.core.register.NacosRegistryService;
 import com.winterchen.core.register.RegistryService;
 import com.winterchen.core.register.ZookeeperRegistryService;
 import com.winterchen.rpc.provider.RpcServerProvider;
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 /**
  * @author winterchen
@@ -30,11 +32,21 @@ public class RpcServerAutoConfiguration {
     }
 
 
+    @Primary
     @Bean
+    @ConditionalOnProperty(prefix = "rpc.server", name = "type", havingValue = "zookeeper", matchIfMissing = true)
     @ConditionalOnMissingBean
     @ConditionalOnBean({RpcServerProperties.class})
     public RegistryService registryService(@Autowired RpcServerProperties rpcServerProperties) {
         return new ZookeeperRegistryService(rpcServerProperties.getRegistryAddr());
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "rpc.server", name = "type", havingValue = "nacos")
+    @ConditionalOnMissingBean
+    @ConditionalOnBean({RpcServerProperties.class})
+    public RegistryService nacosRegistryService(@Autowired RpcServerProperties rpcServerProperties) {
+        return new NacosRegistryService(rpcServerProperties.getRegistryAddr());
     }
 
 

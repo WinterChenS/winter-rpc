@@ -14,14 +14,14 @@ import java.util.List;
 @Slf4j
 public class FullRoundBalance implements LoadBalance {
 
-    private int index;
+    private volatile int index;
 
     @Override
     public synchronized ServiceInfo chooseOne(List<ServiceInfo> serviceInfos) {
         if (index >= serviceInfos.size()) {
             index = 0;
         }
-        return serviceInfos.get(index);
+        return serviceInfos.get(index++);
     }
 
 }

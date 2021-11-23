@@ -1,7 +1,6 @@
 package com.winterchen.rpc.config;
 
 import lombok.Data;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author winterchen
@@ -11,6 +10,11 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  **/
 @Data
 public class RpcServerProperties {
+
+    /**
+     * 注册中心类型: zookeeper/nacos
+     */
+    private String type;
 
     private Integer port;
 
